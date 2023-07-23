@@ -12,7 +12,6 @@ function BagCard(product) {
       .then((data) => {
         window.alert("Your product has been deleted!");
         window.location.reload();
-        console.log(data);
       })
       .catch((error) => console.log(error));
   };

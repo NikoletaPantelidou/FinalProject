@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import DropdownBar from "../Components/Dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function Details() {
-  // const [title, setTitle] = useState();
-  // const [text, setText] = useState();
-  //const [image, setImage] = useState();
+  const [product, setProduct] = useState();
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/product/" + id)
+      .then((data) => setProduct(data.data))
+
+      .catch((error) => console.log(error));
+  }, []);
 
   //the product is added to the bag
   const Add = (e) => {
@@ -22,20 +31,18 @@ function Details() {
       })
       .catch((error) => console.log(error));
   };
+
   return (
     <div>
       <NavigationBar />
       <div className="container-product">
-        <img
-          className="photo-product"
-          alt=""
-          src="https://i.factcool.com/cache2/1400x1400/catalog/products/12/e5/17/12-e5-175dfc28ssu4375ro_0.jpg"
-        ></img>
-        <p className="type"> Dress</p>
+        <img className="photo-product" alt="" src={product.image}></img>
+        <p className="title">{product.title}</p>
         <p className="price"> Price: 40$</p>
         <button className="add-btn" onClick={Add}>
           Add
         </button>
+        <DropdownBar />
       </div>
       <Footer />
     </div>

@@ -7,7 +7,7 @@ import { FaHeart } from "@react-icons/all-files/fa/FaHeart";
 
 function ProductCard(product) {
   //the product is added to the bag
-  console.log(product);
+
   const Add = (e) => {
     e.preventDefault();
     axios
@@ -35,7 +35,6 @@ function ProductCard(product) {
 
       .then((data) => {
         window.alert("Your product has been added to favourites!");
-        console.log(data);
       })
       .catch((error) => console.log(error));
   };
@@ -49,7 +48,7 @@ function ProductCard(product) {
           Add
         </Button>
 
-        <Link to={`/details/${product.product.id}`}>
+        <Link to={`/details/${product.product._id}`}>
           <Button variant="primary">View</Button>
         </Link>
 

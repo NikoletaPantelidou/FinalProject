@@ -34,8 +34,6 @@ code {
   bottom: 0;
   width: 100% !important;
   height: 4.5rem;
-
-  position: fixed;
 }
 
 footer > p {
@@ -104,4 +102,33 @@ footer > p {
 .page-container {
   position: relative;
   min-height: 100vh;
+}
+
+.user-image {
+  width: 300px;
+  border-radius: 177px;
+  align-self: center;
+}
+
+.user-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-info {
+  width: 300px;
+  align-self: center;
+  text-align: center;
+}
+
+.img-file {
+  align-self: center;
+}
+
+button {
+  background-color: white;
+  border-radius: 11px;
+  font-size: 21px;
+  color: black;
 }
