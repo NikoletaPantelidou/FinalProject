@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Container, Form, Button, Alert } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function LoginSignIn() {
@@ -56,35 +55,33 @@ function LoginSignIn() {
   };
 
   return (
-    <Container>
-      <Form>
-        {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-        <Form.Group controlId="formUsername">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type="username"
-            placeholder="Enter username"
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="formPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit" onClick={handleSignin}>
-          Sign In
-        </Button>
-        <Button variant="primary" type="submit" onClick={handleLogin}>
-          Log in
-        </Button>
-      </Form>
-    </Container>
+    <Form>
+      {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username</Form.Label>
+        <Form.Control
+          type="username"
+          placeholder="Enter username"
+          value={username}
+          onChange={handleUsernameChange}
+        />
+      </Form.Group>
+      <Form.Group controlId="formPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit" onClick={handleSignin}>
+        Sign In
+      </Button>
+      <Button variant="primary" type="submit" onClick={handleLogin}>
+        Log in
+      </Button>
+    </Form>
   );
 }
 export default LoginSignIn;

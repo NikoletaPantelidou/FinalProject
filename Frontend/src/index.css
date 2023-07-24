@@ -13,6 +13,26 @@ code {
     monospace;
 }
 
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 160px;
+  padding: 20px;
+  gap: 25px;
+}
+.btn.btn-primary {
+  background-color: #ffffff;
+  border-color: black;
+  color: black;
+  border-width: 2px;
+  border-radius: 0;
+}
+form {
+  border-style: outset;
+  text-align-last: center;
+  width: 400px;
+}
 /* Style the carousel images */
 .carousel img {
   width: 395px !important;
@@ -21,28 +41,25 @@ code {
   float: left;
 }
 
+.div-carousel {
+  min-height: calc(100vh - 70px);
+}
 .bg-body-tertiary.navbar {
   background-color: #dbc8c8 !important;
 }
 
 .carousel {
   left: 150px;
+  position: relative;
 }
 
+/*this is the footer's css*/
 .bg-dark.py-3 {
   background-color: #dbc8c8 !important;
-  bottom: 0;
-  width: 100% !important;
-  height: 4.5rem;
+  color: black !important;
+  height: 50px;
 }
 
-footer > p {
-  bottom: 0;
-  width: 100%;
-  height: 2.5rem;
-  color: black;
-  position: fixed;
-}
 .search {
   text-align: center;
 }
@@ -82,6 +99,7 @@ footer > p {
   gap: 1em;
   flex-wrap: wrap;
   padding: 24px;
+  min-height: calc(100vh - 70px);
 }
 
 .bag-cards {
@@ -90,6 +108,7 @@ footer > p {
   flex-wrap: wrap;
   justify-content: center;
   padding: 24px;
+  min-height: calc(100vh - 70px);
 }
 
 .fav-cards {
@@ -98,10 +117,7 @@ footer > p {
   flex-wrap: wrap;
   justify-content: center;
   padding: 24px;
-}
-.page-container {
-  position: relative;
-  min-height: 100vh;
+  min-height: calc(100vh - 70px);
 }
 
 .user-image {
@@ -114,6 +130,7 @@ footer > p {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-height: calc(100vh - 70px);
 }
 
 .user-info {
@@ -131,4 +148,46 @@ button {
   border-radius: 11px;
   font-size: 21px;
   color: black;
+}
+
+.slider {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+.slider .slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  animation: slide 10s infinite;
+}
+.slide {
+  position: absolute;
+  z-index: -1;
+}
+
+/*@keyframes slide {
+  0%,
+  15%,
+  100% {
+    transform: translateX(0);
+    animation-timing-function: ease;
+  }
+  20% {
+    transform: translateX(-100%);
+    animation-timing-function: step-end;
+  }
+  95% {
+    transform: translateX(100%);
+    animation-timing-function: ease;
+  }
+}*/
+
+.inactive {
+  display: none;
 }

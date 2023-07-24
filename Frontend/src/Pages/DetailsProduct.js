@@ -18,7 +18,7 @@ function Details() {
       .then((data) => setProduct(data.data))
 
       .catch((error) => console.log(error));
-  }, []);
+  });
 
   //the product is added to the bag
   const Add = (e) => {

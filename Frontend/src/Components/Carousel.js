@@ -6,15 +6,15 @@ function UncontrolledCarousel() {
   const images = [
     {
       imageUrl:
-        "https://static.bershka.net/4/photos2/2023/I/0/1/p/7555/326/712//01/7555326712_1_3_4.jpg?t=1689243469513",
+        "https://ceftandcompany.com/wp-content/uploads/2009/02/ceft-and-company-ny-agency-adore-fashion-advertising-reid-kastyn-glen-lutchford-03.jpg",
     },
     {
       imageUrl:
-        "https://static.bershka.net/4/photos2/2023/I/0/1/p/6172/692/520/1fb42e1c94d4e4a11265211b0bf1d6ae-6172692520_1_3_0.jpg?imwidth=750&impolicy=bershka-itxmediumhigh&imformat=chrome",
+        "https://cmmodels.com/wp-content/uploads/2015/10/model-fuer-werbung-werbemodels-video-tv-mode-spot-mann-frau-paar-innenstadt-city-liebe.jpg",
     },
     {
       imageUrl:
-        "https://static.pxlecdn.com/photos/593713185/xl/3f42df55003faa616069.jpg",
+        "https://fashionista.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTUyNzE3MDg3NjQxNDQ1OTI2/master_chloe_ss18_fashion1_1920x1080.jpg",
     },
   ];
   return (

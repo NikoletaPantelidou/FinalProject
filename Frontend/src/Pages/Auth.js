@@ -4,6 +4,24 @@ import axios from "axios";
 import LoginSignIn from "./Login-Signin";
 
 function Auth() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [
+    "https://www.ukmodels.co.uk/wp-content/uploads/2020/08/shutterstock_1458127937-scaled.jpg",
+
+    "https://ceftandcompany.com/wp-content/uploads/2009/02/ceft-and-company-ny-agency-adore-fashion-advertising-reid-kastyn-glen-lutchford-03.jpg",
+
+    //"https://ceftandcompany.com/wp-content/uploads/2009/02/ceft-and-company-ny-agency-adore-fashion-advertising-reid-kastyn-glen-lutchford-03.jpg",
+  ];
+
+  const handleSlideChange = () => {
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(handleSlideChange, 5000); // Change slide every 5 seconds
+    return () => clearInterval(interval);
+  });
+
   const [user, setUser] = useState([]);
   const [profile, setProfile] = useState([]);
 
@@ -44,24 +62,35 @@ function Auth() {
   };
 
   return (
-    <div>
-      <LoginSignIn />
-      <h2>React Google Login</h2>
-      <br />
-      <br />
-      {profile ? (
-        <div>
-          <img src={profile.picture} alt="user image" />
-          <h3> {profile.name} Logged in</h3>
-          <p>Name: {profile.name}</p>
-          <p>Email Address: {profile.email}</p>
-          <br />
-          <br />
-          <button onClick={logOut}>Log out</button>
-        </div>
-      ) : (
-        <button onClick={() => login()}>Sign in with Google 🚀 </button>
-      )}
+    <div className="slider">
+      {slides.map((slide, index) => (
+        <div
+          key={index}
+          className={`slide ${index === currentSlide ? "active" : "inactive"} `}
+          style={{
+            backgroundImage: `url(${slide})`,
+          }}
+        ></div>
+      ))}
+
+      <div className="auth-container">
+        <LoginSignIn />
+        <h2 className="header-google">Sign in with one click!</h2>
+
+        {profile ? (
+          <div>
+            <img src={profile.picture} alt="user-image" />
+            <h3> {profile.name} Logged in</h3>
+            <p>Name: {profile.name}</p>
+            <p>Email Address: {profile.email}</p>
+            <br />
+            <br />
+            <button onClick={logOut}>Log out</button>
+          </div>
+        ) : (
+          <button onClick={() => login()}>Sign in with Google 🚀 </button>
+        )}
+      </div>
     </div>
   );
 }

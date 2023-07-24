@@ -7,8 +7,10 @@ import UncontrolledCarousel from "../Components/Carousel";
 function CoverPage() {
   return (
     <div className="page-container">
-      <NavigationBar />
-      <UncontrolledCarousel />
+      <div className=" div-carousel">
+        <NavigationBar />
+        <UncontrolledCarousel />
+      </div>
       <Footer />
     </div>
   );

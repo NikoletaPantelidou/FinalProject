@@ -12,7 +12,10 @@ function NavigationBar() {
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand>StyleWithMe</Navbar.Brand>
+        <Nav.Link as={Link} to="/homepage">
+          <Navbar.Brand>StyleWithMe</Navbar.Brand>
+        </Nav.Link>
+
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
