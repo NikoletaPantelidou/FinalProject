@@ -165,13 +165,14 @@ button {
   background-size: cover;
   background-position: center;
   animation: slide 10s infinite;
+  transition-delay: 2s;
 }
 .slide {
   position: absolute;
   z-index: -1;
 }
 
-/*@keyframes slide {
+@keyframes slide {
   0%,
   15%,
   100% {
@@ -186,7 +187,7 @@ button {
     transform: translateX(100%);
     animation-timing-function: ease;
   }
-}*/
+}
 
 .inactive {
   display: none;
