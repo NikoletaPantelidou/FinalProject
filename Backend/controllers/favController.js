@@ -2,11 +2,12 @@ const favModel = require("../models/favModel.js");
 
 var postFav = async (req, res) => {
   try {
-    const { title, image, text } = req.body;
+    const { title, image, text, price } = req.body;
     const fav = new favModel({
       title,
       image,
       text,
+      price,
     });
     const savedFav = await fav.save();
     res.status(201).json(savedFav);

@@ -20,11 +20,12 @@ var getAllProducts = async (req, res) => {
 
 var postProduct = async (req, res) => {
   try {
-    const { title, image, text } = req.body;
+    const { title, image, text, price } = req.body;
     const product = new productModel({
       title,
       image,
       text,
+      price,
     });
     const savedProduct = await product.save();
     res.status(201).json(savedProduct);

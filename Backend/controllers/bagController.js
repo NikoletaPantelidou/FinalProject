@@ -2,11 +2,12 @@ const bagModel = require("../models/bagModel.js");
 
 var postBag = async (req, res) => {
   try {
-    const { title, image, text } = req.body;
+    const { title, image, text, price } = req.body;
     const bag = new bagModel({
       title,
       image,
       text,
+      price,
     });
     const savedBag = await bag.save();
     res.status(201).json(savedBag);

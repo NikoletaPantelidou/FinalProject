@@ -27,6 +27,7 @@ code {
   color: black;
   border-width: 2px;
   border-radius: 0;
+  margin: 5px;
 }
 form {
   border-style: outset;
@@ -191,4 +192,14 @@ button {
 
 .inactive {
   display: none;
+}
+
+.btn.btn-danger {
+  border-radius: 0;
+  margin: 5px;
+}
+
+.btn.btn-secondary {
+  border-radius: 0;
+  margin: 5px;
 }

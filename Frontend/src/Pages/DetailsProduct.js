@@ -8,7 +8,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 function Details() {
-  const [product, setProduct] = useState();
+  const [product, setProduct] = useState({});
 
   const { id } = useParams();
 
@@ -38,7 +38,8 @@ function Details() {
       <div className="container-product">
         <img className="photo-product" alt="" src={product.image}></img>
         <p className="title">{product.title}</p>
-        <p className="price"> Price: 40$</p>
+        <p className="text"> {product.text}</p>
+        <p className="price">{product.price}</p>
         <button className="add-btn" onClick={Add}>
           Add
         </button>

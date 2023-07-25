@@ -9,6 +9,7 @@ import axios from "axios";
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
   //all products appear on the page
   useEffect(() => {
@@ -18,11 +19,22 @@ export default function HomePage() {
       .catch((err) => console.log(err));
   }, []);
 
+  const filteredProducts = products.filter(
+    (product) =>
+      product.title &&
+      product.title.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
   return (
     <div className="container-home">
       <NavigationBar />
       <div className="search">
-        <input className="input-search"></input>
+        <input
+          className="input-search"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          placeholder="Search by type..."
+        />
 
         <button className="search-btn">
           <FaSearch />
@@ -30,11 +42,12 @@ export default function HomePage() {
 
         {
           <div className="product-cards">
-            {products.map((product, index) => (
+            {filteredProducts.map((product, index) => (
               <ProductCard key={index} product={product} />
             ))}
           </div>
         }
+
         <Footer />
       </div>
     </div>

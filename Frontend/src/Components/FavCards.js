@@ -13,6 +13,7 @@ function FavCard(product) {
         title: product.product.title,
         text: product.product.text,
         image: product.product.image,
+        price: product.product.price,
       })
 
       .then((data) => {
@@ -37,6 +38,7 @@ function FavCard(product) {
       <Card.Body>
         <Card.Title>{product.product.title}</Card.Title>
         <Card.Text>{product.product.text}</Card.Text>
+        <Card.Text>{product.product.price}</Card.Text>
         <Button variant="primary" onClick={() => Delete(product.product._id)}>
           Delete
         </Button>
