@@ -14,8 +14,6 @@ function App() {
   return (
     <Routes>
       <Route path="/user/auth" element={<Auth />} />
-      <Route path="/user/login" element={<LoginSignIn />} />
-      <Route path="/user/signin" element={<LoginSignIn />} />
       <Route path="/" element={<CoverPage />} />
       <Route path="/details/:id" element={<Details />} />
       <Route path="/homepage" element={<HomePage />} />

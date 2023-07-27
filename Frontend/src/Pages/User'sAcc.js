@@ -13,9 +13,11 @@ export default function MyAccount() {
   return (
     <div>
       <NavigationBar />
+
       <div className="user-container">
         <input className="img-file" type="file" onChange={handleChange} />
         <img className="user-image" src={file} />
+
         <div className="user-info">
           <input className="user-name" placeholder="Name" />
           <input className="user-surname" placeholder="Surname" />

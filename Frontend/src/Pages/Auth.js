@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import LoginSignIn from "./Login-Signin";
+import { useNavigate } from "react-router-dom";
 
 function Auth() {
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
     "https://assets.rebelmouse.io/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbWFnZSI6Imh0dHBzOi8vYXNzZXRzLnJibC5tcy8yNTcxMTE4MC9vcmlnaW4uanBnIiwiZXhwaXJlc19hdCI6MTcxODMzMzU0NX0.P92KrX6-h01cz-763JFyim6rok21mqgjOu_BCQ3xFPw/img.jpg?width=1200&height=800&quality=85&coordinates=0%2C0%2C0%2C2",
     "https://www.ukmodels.co.uk/wp-content/uploads/2020/08/shutterstock_1458127937-scaled.jpg",
-
     "https://fashionista.com/.image/t_share/MTk1MDY4MjE5MDU5MzQ4Njc5/prada-spring-2023-campaign.jpg",
-
     "https://media.glamourmagazine.co.uk/photos/6138ad716c53c747be7bd89e/16:9/w_2560%2Cc_limit/modelspartner_hp1.jpg",
     "https://graziamagazine.com/me/wp-content/uploads/sites/16/2022/10/best-fashion-campaigns-2022.png?fit=1280%2C720",
   ];
@@ -26,6 +26,7 @@ function Auth() {
 
   const [user, setUser] = useState([]);
   const [profile, setProfile] = useState([]);
+  const [redirectToHome, setRedirectToHome] = useState(false);
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => setUser(codeResponse),
@@ -52,15 +53,26 @@ function Auth() {
         )
         .then((res) => {
           setProfile(res.data);
+
+          if (redirectToHome) {
+            navigate("/homepage"); // Redirect to the homepage when redirectToHome is true
+          }
         })
         .catch((err) => console.log(err));
     }
   }, [user]);
 
+  useEffect(() => {
+    if (profile && profile.name && user.access_token) {
+      navigate("/homepage");
+    }
+  }, [profile, user.access_token, navigate]);
+
   // log out function to log the user out of google and set the profile array to null
   const logOut = () => {
     googleLogout();
     setProfile(null);
+    setUser([]);
   };
 
   return (

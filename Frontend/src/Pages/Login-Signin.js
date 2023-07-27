@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Container, Form, Button, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link, useNavigate } from "react-router-dom";
 
 function LoginSignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  //const navigate = useNavigate();
-
+  const navigate = useNavigate();
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
@@ -46,7 +45,7 @@ function LoginSignIn() {
 
       // Handle successful login response
       console.log("Login:", response.data);
-      //navigate("/homes");
+      navigate("/homepage");
     } catch (error) {
       // Handle login error
       console.log(error);
@@ -78,9 +77,11 @@ function LoginSignIn() {
       <Button variant="primary" type="submit" onClick={handleSignin}>
         Sign In
       </Button>
-      <Button variant="primary" type="submit" onClick={handleLogin}>
-        Log in
-      </Button>
+      <Link to={"/homepage"}>
+        <Button variant="primary" type="submit" onClick={handleLogin}>
+          Log in
+        </Button>
+      </Link>
     </Form>
   );
 }

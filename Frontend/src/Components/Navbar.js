@@ -7,8 +7,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FaShoppingBag } from "@react-icons/all-files/fa/FaShoppingBag";
 import { FaHeart } from "@react-icons/all-files/fa/FaHeart";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function NavigationBar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  const logout = () => {
+    window.localStorage.removeItem("userID");
+    navigate("/");
+  };
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
@@ -35,6 +44,9 @@ function NavigationBar() {
 
             <Nav.Link as={Link} to="/user/auth">
               Log-in/Sign-in
+            </Nav.Link>
+            <Nav.Link as={Link} to="/">
+              Log-out
             </Nav.Link>
           </NavDropdown>
           <Nav>
