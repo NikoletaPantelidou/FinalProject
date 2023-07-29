@@ -41,13 +41,13 @@ function BagCard(product) {
           variant="primary"
           onClick={() => handleDeleteConfirmation(product.product._id)}
         >
-          Delete
+          Buy
         </Button>
 
-        <Button variant="primary">Buy</Button>
+        <Button variant="danger">Delete</Button>
       </Card.Body>
       {showConfirmation && (
-        <div>
+        <div className="confirmation">
           <p>Are you sure you want to delete this product?</p>
           <Button
             variant="danger"

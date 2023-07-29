@@ -1,33 +1,33 @@
 import Carousel from "react-bootstrap/Carousel";
-import ExampleCarouselImage from "../Components/ExampleCarouselImage";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function UncontrolledCarousel() {
   const images = [
     {
       imageUrl:
-        "https://ceftandcompany.com/wp-content/uploads/2009/02/ceft-and-company-ny-agency-adore-fashion-advertising-reid-kastyn-glen-lutchford-03.jpg",
+        "https://img.freepik.com/free-photo/black-woman-trendy-grey-leather-jacket-posing-beige-background-studio-winter-autumn-fashion-look_273443-141.jpg",
     },
     {
       imageUrl:
-        "https://cmmodels.com/wp-content/uploads/2015/10/model-fuer-werbung-werbemodels-video-tv-mode-spot-mann-frau-paar-innenstadt-city-liebe.jpg",
+        "https://img.freepik.com/premium-photo/two-young-beautiful-smiling-hipster-girls-trendy-white-sweater-coat_158538-16930.jpg",
     },
     {
       imageUrl:
-        "https://fashionista.com/.image/c_fit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_620/MTUyNzE3MDg3NjQxNDQ1OTI2/master_chloe_ss18_fashion1_1920x1080.jpg",
+        "https://assets.vogue.com/photos/5f5fac8b7d9362f52d645560/16:9/w_1280,c_limit/social-holding.jpg",
+    },
+    {
+      imageUrl:
+        "https://media.istockphoto.com/id/108329358/photo/blonde-woman-in-wild-patterned-dress.jpg?s=612x612&w=0&k=20&c=tSrU_HjEw3s5r9GUIWS2EBnNkBnBHX7VswmkEoMZ0As=",
     },
   ];
   return (
     <Carousel>
-      <Carousel.Item>
-        <ExampleCarouselImage images={images} />
-      </Carousel.Item>
-      <Carousel.Item>
-        <ExampleCarouselImage images={images} />
-      </Carousel.Item>
-      <Carousel.Item>
-        <ExampleCarouselImage images={images} />
-      </Carousel.Item>
+      {images.map((image, index) => (
+        <Carousel.Item key={index}>
+          <img src={image.imageUrl} alt={image.text} />
+          <p>{image.text}</p>
+        </Carousel.Item>
+      ))}
     </Carousel>
   );
 }

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+import { googleLogout } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import LoginSignIn from "./Login-Signin";
 import { useNavigate } from "react-router-dom";
 
-function Auth() {
+export default function Auth() {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
@@ -22,25 +23,18 @@ function Auth() {
   useEffect(() => {
     const interval = setInterval(handleSlideChange, 5000); // Change slide every 5 seconds
     return () => clearInterval(interval);
-  });
+  }, []);
 
   const [user, setUser] = useState([]);
   const [profile, setProfile] = useState([]);
-  const [redirectToHome, setRedirectToHome] = useState(false);
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => setUser(codeResponse),
     onError: (error) => console.log("Login Failed:", error),
   });
-  // In the onSuccess function, I set our profile state with the data that was returned.
-  // This data contains the user’s details, like google_id, access_token, email, name, and so on
 
-  //Finally, we are using a conditional to change our UI: if the profile is true,
-  //the UI will show us the profile of the logged-in user with their image, name, and
-  //email. If the profile becomes null (i.e., when the user has logged out using
-  // the GoogleLogout button), it will show us the login button:
   useEffect(() => {
-    if (user) {
+    if (user && user.access_token) {
       axios
         .get(
           `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
@@ -53,27 +47,24 @@ function Auth() {
         )
         .then((res) => {
           setProfile(res.data);
-
-          if (redirectToHome) {
-            navigate("/homepage"); // Redirect to the homepage when redirectToHome is true
-          }
         })
         .catch((err) => console.log(err));
     }
   }, [user]);
 
+  // log out function to log the user out of google and reset the state variables
+  const logOut = () => {
+    googleLogout();
+    setProfile([]);
+    setUser([]);
+  };
+
+  // useEffect to handle the redirection to the homepage
   useEffect(() => {
     if (profile && profile.name && user.access_token) {
       navigate("/homepage");
     }
   }, [profile, user.access_token, navigate]);
-
-  // log out function to log the user out of google and set the profile array to null
-  const logOut = () => {
-    googleLogout();
-    setProfile(null);
-    setUser([]);
-  };
 
   return (
     <div className="slider">
@@ -88,24 +79,27 @@ function Auth() {
       ))}
 
       <div className="auth-container">
-        <LoginSignIn />
-        <h2 className="header-google">Sign in with one click!</h2>
+        <form>
+          <LoginSignIn />
+          <h2 className="header-google">Sign in with one click!</h2>
 
-        {profile ? (
-          <div>
-            <img src={profile.picture} alt="user-image" />
-            <h3> {profile.name} Logged in</h3>
-            <p>Name: {profile.name}</p>
-            <p>Email Address: {profile.email}</p>
-            <br />
-            <br />
-            <button onClick={logOut}>Log out</button>
-          </div>
-        ) : (
-          <button onClick={() => login()}>Sign in with Google 🚀 </button>
-        )}
+          {profile && profile.name && user.access_token ? (
+            <div>
+              <img src={profile.picture} alt="user-image" />
+              <h3> {profile.name} Logged in</h3>
+              <p>Name: {profile.name}</p>
+              <p>Email Address: {profile.email}</p>
+              <br />
+              <br />
+              <button onClick={logOut}>Log out</button>
+            </div>
+          ) : (
+            <button className="google-btn " onClick={() => login()}>
+              Sign in with Google 🚀{" "}
+            </button>
+          )}
+        </form>
       </div>
     </div>
   );
 }
-export default Auth;

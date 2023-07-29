@@ -21,49 +21,74 @@ code {
   margin: 160px;
   padding: 20px;
   gap: 25px;
+  font-family: papyrus;
 }
 
 .btn.btn-primary {
-  background-color: #ffffff;
-  border-color: black;
+  background-color: #dbc8c8;
   color: black;
   border-width: 2px;
-  border-radius: 0;
+  border-radius: 13px;
   margin: 5px;
+  border: none;
 }
 form {
-  border-style: outset;
+  margin: -3px;
+  border-style: solid;
+  border-color: white;
   text-align-last: center;
-  width: 400px;
+  width: 349px;
+  background-color: white;
+  font-family: papyrus;
+  border-radius: 20px;
+}
+
+.google-btn {
+  background-color: #dbc8c8;
+  color: black;
+  border-width: 2px;
+  border-radius: 13px;
+  margin: 5px;
+  border: none;
 }
 /* Style the carousel */
+.page-container {
+  font-family: papyrus;
+}
 .carousel img {
-  width: 395px !important;
+  max-width: 100%; /* Ensures images don't exceed the container's width */
+  width: 600px !important; /* Set your desired image width */
+  height: auto;
   object-fit: cover;
   margin: 0;
   float: left;
 }
-
 .div-carousel {
   min-height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .bg-body-tertiary.navbar {
   background-color: #dbc8c8 !important;
+  font-family: papyrus;
 }
 
 .carousel {
-  left: 150px;
-  position: relative;
 }
 
 /*this is the footer's css*/
 .bg-dark.py-3 {
   background-color: #dbc8c8 !important;
   color: black !important;
-  height: 50px;
+  height: 100px;
+  font-family: papyrus;
 }
 
 /*styling of the search-bar*/
+.container-home {
+  font-family: papyrus;
+}
 .search {
   text-align: center;
 }
@@ -97,6 +122,14 @@ form {
   flex-direction: column;
   align-items: center;
   margin: 50px;
+  font-family: papyrus;
+}
+.card-body {
+  font-family: papyrus;
+}
+
+.confirmation {
+  font-family: papyrus;
 }
 .product-cards {
   display: flex;
@@ -105,6 +138,7 @@ form {
   padding: 24px;
   min-height: calc(100vh - 70px);
   box-shadow: 5px 5px 10px #ccc;
+  justify-content: center;
 }
 .bag-cards {
   display: flex;
@@ -113,6 +147,7 @@ form {
   justify-content: center;
   padding: 24px;
   min-height: calc(100vh - 70px);
+  padding: 60px;
 }
 
 .fav-cards {
@@ -120,24 +155,29 @@ form {
   gap: 1em;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 24px;
+  padding: 60px;
   min-height: calc(100vh - 70px);
 }
 .card:hover {
   transform: scale(1.2);
 }
 .card {
-  box-shadow: 5px 11px 14px 0px;
+  box-shadow: 5px 7px 6px -5px;
 }
 
 .btn.btn-danger {
-  border-radius: 0;
+  color: black;
+  border-width: 2px;
+  border-radius: 13px;
   margin: 5px;
+  border: none;
+  background-color: #f34747;
 }
 
 .btn.btn-secondary {
   border-radius: 0;
   margin: 5px;
+  border-radius: 13px;
 }
 
 /*style of the react icons (heart,bag)*/
@@ -157,6 +197,7 @@ svg:hover {
   flex-direction: column;
   justify-content: center;
   min-height: calc(100vh - 70px);
+  font-family: papyrus;
 }
 
 .user-info {
@@ -191,8 +232,8 @@ button {
   height: 100%;
   background-size: cover;
   background-position: center;
-  animation: slide 10s infinite;
-  transition-delay: 2s;
+  animation: slide infinite;
+  transition-delay: 1s;
 }
 .slide {
   position: absolute;
@@ -200,17 +241,15 @@ button {
 }
 
 @keyframes slide {
-  0%,
-  15%,
-  100% {
+  20% {
     transform: translateX(0);
     animation-timing-function: ease;
   }
-  20% {
+  40% {
     transform: translateX(-100%);
     animation-timing-function: step-end;
   }
-  95% {
+  100% {
     transform: translateX(100%);
     animation-timing-function: ease;
   }

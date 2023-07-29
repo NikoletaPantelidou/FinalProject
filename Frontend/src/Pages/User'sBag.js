@@ -16,7 +16,7 @@ export default function Bag() {
   }, []);
 
   return (
-    <div>
+    <div className="user-bag-container">
       <NavigationBar />
       {
         <div className="bag-cards">
