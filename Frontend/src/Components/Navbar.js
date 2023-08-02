@@ -11,11 +11,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function NavigationBar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   const logout = () => {
-    window.localStorage.removeItem("userID");
+    localStorage.removeItem("userProfile");
     navigate("/");
   };
   return (
@@ -43,9 +43,12 @@ function NavigationBar() {
             <NavDropdown.Divider />
 
             <Nav.Link as={Link} to="/user/auth">
-              Log-in/Sign-in
+              Log-in
             </Nav.Link>
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to="/user/sign-in">
+              Sign-in
+            </Nav.Link>
+            <Nav.Link as={Link} to="/" onClick={() => logout()}>
               Log-out
             </Nav.Link>
           </NavDropdown>

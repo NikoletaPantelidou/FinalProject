@@ -57,7 +57,7 @@ form {
 }
 .carousel img {
   max-width: 100%; /* Ensures images don't exceed the container's width */
-  width: 600px !important; /* Set your desired image width */
+  width: 900px !important; /* Set your desired image width */
   height: auto;
   object-fit: cover;
   margin: 0;
@@ -190,6 +190,11 @@ svg:hover {
   width: 300px;
   border-radius: 177px;
   align-self: center;
+}
+
+.user-pic{
+  width: 175px;
+    place-self: center;
 }
 
 .user-container {

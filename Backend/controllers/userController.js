@@ -11,7 +11,15 @@ var userSignin = async (req, res) => {
   }
   bcrypt.genSalt(10, function (err, salt) {
     bcrypt.hash(req.body.password, salt, async (err, hash) => {
-      var user = { username: req.body.username, password: hash };
+      var user = {
+        username: req.body.username,
+        address: req.body.address,
+        mobile: req.body.mobile,
+        email: req.body.email,
+        city: req.body.city,
+        password: hash,
+      };
+
       await userModel.create(user);
       res.send({ msg: "The user saved successfully" });
     });

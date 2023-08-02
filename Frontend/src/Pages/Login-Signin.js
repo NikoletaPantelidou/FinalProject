@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Container, Form, Button, Alert } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom";
 
-function LoginSignIn() {
+function LogIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -75,9 +75,7 @@ function LoginSignIn() {
           onChange={handlePasswordChange}
         />
       </Form.Group>
-      <Button variant="primary" type="submit" onClick={handleSignin}>
-        Sign In
-      </Button>
+
       <Link to={"/homepage"}>
         <Button variant="primary" type="submit" onClick={handleLogin}>
           Log in
@@ -86,4 +84,4 @@ function LoginSignIn() {
     </Form>
   );
 }
-export default LoginSignIn;
+export default LogIn;

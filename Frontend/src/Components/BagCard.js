@@ -37,14 +37,14 @@ function BagCard(product) {
         <Card.Title>{product.product.title}</Card.Title>
         <Card.Text>{product.product.text}</Card.Text>
         <Card.Text>{product.product.price}</Card.Text>
+        <Button variant="primary">Buy</Button>
+
         <Button
-          variant="primary"
+          variant="danger"
           onClick={() => handleDeleteConfirmation(product.product._id)}
         >
-          Buy
+          Delete
         </Button>
-
-        <Button variant="danger">Delete</Button>
       </Card.Body>
       {showConfirmation && (
         <div className="confirmation">

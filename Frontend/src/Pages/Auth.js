@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { googleLogout } from "@react-oauth/google";
-import { useGoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin, googleLogout } from "@react-oauth/google";
 import axios from "axios";
-import LoginSignIn from "./Login-Signin";
 import { useNavigate } from "react-router-dom";
+import LogIn from "./Login-Signin";
 
 export default function Auth() {
   const navigate = useNavigate();
@@ -20,40 +19,39 @@ export default function Auth() {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
     const interval = setInterval(handleSlideChange, 5000); // Change slide every 5 seconds
     return () => clearInterval(interval);
-  }, []);
+  });*/
 
   const [user, setUser] = useState([]);
   const [profile, setProfile] = useState([]);
 
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => setUser(codeResponse),
-    onError: (error) => console.log("Login Failed:", error),
-  });
-
-  useEffect(() => {
-    if (user && user.access_token) {
+    onSuccess: (codeResponse) => {
+      setUser(codeResponse);
       axios
         .get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${codeResponse.access_token}`,
           {
             headers: {
-              Authorization: `Bearer ${user.access_token}`,
+              Authorization: `Bearer ${codeResponse.access_token}`,
               Accept: "application/json",
             },
           }
         )
         .then((res) => {
           setProfile(res.data);
+          localStorage.setItem("userProfile", JSON.stringify(res.data));
         })
         .catch((err) => console.log(err));
-    }
-  }, [user]);
+    },
+    onError: (error) => console.log("Login Failed:", error),
+  });
 
   // log out function to log the user out of google and reset the state variables
   const logOut = () => {
+    localStorage.removeItem("userProfile");
     googleLogout();
     setProfile([]);
     setUser([]);
@@ -79,26 +77,27 @@ export default function Auth() {
       ))}
 
       <div className="auth-container">
-        <form>
-          <LoginSignIn />
-          <h2 className="header-google">Sign in with one click!</h2>
+        <div>
+          <LogIn />
+        </div>
 
-          {profile && profile.name && user.access_token ? (
-            <div>
-              <img src={profile.picture} alt="user-image" />
-              <h3> {profile.name} Logged in</h3>
-              <p>Name: {profile.name}</p>
-              <p>Email Address: {profile.email}</p>
-              <br />
-              <br />
-              <button onClick={logOut}>Log out</button>
-            </div>
-          ) : (
-            <button className="google-btn " onClick={() => login()}>
-              Sign in with Google 🚀{" "}
-            </button>
-          )}
-        </form>
+        <h2 className="header-google">Sign in with one click!</h2>
+
+        {profile && profile.name && user.access_token ? (
+          <div>
+            <img src={profile.picture} alt="user image" />
+            <h3> {profile.name} Logged in</h3>
+            <p>Name: {profile.name}</p>
+            <p>Email Address: {profile.email}</p>
+            <br />
+            <br />
+            <button onClick={() => logOut()}>Log out</button>
+          </div>
+        ) : (
+          <button className="google-btn " onClick={() => login()}>
+            Sign in with Google 🚀{" "}
+          </button>
+        )}
       </div>
     </div>
   );
