@@ -33,7 +33,10 @@ var userLogin = async (req, res) => {
       if (result) {
         //create the token to send it back to the front
         //payload + secret ==> token
-        var token = jwt.sign({ id: user._id }, "greenfield");
+        var token = jwt.sign({ id: user._id }, "123", process.env.TOKEN_KEY, {
+          expiresIn: "2h",
+        });
+        user.token = token;
         res.send({ token });
       } else {
         res.status(500).json({ error: "Wrong password" });
@@ -43,6 +46,21 @@ var userLogin = async (req, res) => {
     res.status(500).json({ error: "Wrong username" });
   }
 };
+
+/*const getUserInfoByToken = async (req, res, next) => {
+  const token= user.token
+  const id = req.params.id;
+  let user;
+  try {
+    user = await Book.findById(id);
+  } catch (error) {
+    console.log(error);
+  }
+  if (!book) {
+    return res.status(404).json({ message: "No Book found" });
+  }
+  return res.status(200).json({ book });
+}; */
 
 module.exports = {
   userLogin,
