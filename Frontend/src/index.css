@@ -41,6 +41,21 @@ form {
   background-color: white;
   font-family: papyrus;
   border-radius: 20px;
+  /*  margin-left: 463px;
+  margin-top: 122px; */
+}
+
+.sign-in-form {
+  margin: -3px;
+  border-style: solid;
+  border-color: white;
+  text-align-last: center;
+  width: 349px;
+  background-color: white;
+  font-family: papyrus;
+  border-radius: 20px;
+  margin-left: 531px;
+  margin-top: 122px;
 }
 
 .google-btn {
@@ -192,9 +207,9 @@ svg:hover {
   align-self: center;
 }
 
-.user-pic{
+.user-pic {
   width: 175px;
-    place-self: center;
+  place-self: center;
 }
 
 .user-container {

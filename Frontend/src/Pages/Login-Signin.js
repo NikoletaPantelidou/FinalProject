@@ -9,16 +9,17 @@ function LogIn() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  //debugger;
   const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+    setUsername(event);
   };
 
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+    setPassword(event);
   };
 
-  const handleSignin = async (event) => {
-    event.preventDefault();
+  const handleSignin = async () => {
+    /* event.preventDefault();*/
 
     try {
       const response = await axios.post("http://localhost:4000/user/signin", {
@@ -35,16 +36,23 @@ function LogIn() {
   };
 
   const handleLogin = async (event) => {
-    event.preventDefault();
+    //  event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:4000/user/login", {
-        username,
-        password,
-      });
-
+      await axios
+        .post("http://localhost:4000/user/login", {
+          username,
+          password,
+        })
+        .then(async (token) => {
+          debugger;
+          const user = await axios.get(
+            "http://localhost:4000/user/userInfo/" + token.token
+          );
+          localStorage.setItem("userProfile", JSON.stringify(user.data));
+        });
       // Handle successful login response
-      console.log("Login:", response.data);
+
       navigate("/homepage");
     } catch (error) {
       // Handle login error
@@ -63,7 +71,7 @@ function LogIn() {
           type="username"
           placeholder="Enter username"
           value={username}
-          onChange={handleUsernameChange}
+          onChange={() => handleUsernameChange()}
         />
       </Form.Group>
       <Form.Group controlId="formPassword">
@@ -72,15 +80,23 @@ function LogIn() {
           type="password"
           placeholder="Password"
           value={password}
-          onChange={handlePasswordChange}
+          onChange={() => handlePasswordChange()}
         />
       </Form.Group>
 
       <Link to={"/homepage"}>
-        <Button variant="primary" type="submit" onClick={handleLogin}>
+        <Button variant="primary" type="submit" onClick={() => handleLogin()}>
           Log in
         </Button>
       </Link>
+      <div>
+        <p>
+          Don't you have an account? Sign in{" "}
+          <Link to={"/user/sign-in"}>
+            <span className="underline">here!</span>
+          </Link>
+        </p>
+      </div>
     </Form>
   );
 }

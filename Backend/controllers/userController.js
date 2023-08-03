@@ -47,22 +47,19 @@ var userLogin = async (req, res) => {
   }
 };
 
-/*const getUserInfoByToken = async (req, res, next) => {
-  const token= user.token
-  const id = req.params.id;
-  let user;
+var getUserInfoByToken = async (req, res) => {
+  const token = req.params.token;
+  const decodedToken = jwt.verify(token, "123");
   try {
-    user = await Book.findById(id);
+    const user = await userModel.findById(decodedToken.id);
+    res.status(200).json(user);
   } catch (error) {
-    console.log(error);
+    res.status(500).json(error);
   }
-  if (!book) {
-    return res.status(404).json({ message: "No Book found" });
-  }
-  return res.status(200).json({ book });
-}; */
+};
 
 module.exports = {
   userLogin,
   userSignin,
+  getUserInfoByToken,
 };
