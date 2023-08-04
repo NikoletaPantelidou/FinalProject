@@ -44,8 +44,6 @@ form {
   background-color: white;
   font-family: papyrus;
   border-radius: 20px;
-  /*  margin-left: 463px;
-  margin-top: 122px; */
 }
 
 .sign-in-form {
@@ -90,9 +88,6 @@ form {
 .bg-body-tertiary.navbar {
   background-color: #dbc8c8 !important;
   font-family: papyrus;
-}
-
-.carousel {
 }
 
 /*this is the footer's css*/
@@ -168,6 +163,12 @@ form {
   padding: 60px;
 }
 
+.bag-msg,
+.fav-msg {
+  font-family: papyrus;
+  align-self: center;
+  font-size: x-large;
+}
 .fav-cards {
   display: flex;
   gap: 1em;

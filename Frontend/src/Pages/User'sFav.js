@@ -18,13 +18,15 @@ export default function Favourites() {
   return (
     <div>
       <NavigationBar />
-      {
-        <div className="fav-cards">
-          {products.map((product) => (
+      <div className="fav-cards">
+        {products.length === 0 ? (
+          <p className="fav-msg">Your favorites' list is empty.</p>
+        ) : (
+          products.map((product) => (
             <FavCard key={product._id} product={product} />
-          ))}
-        </div>
-      }
+          ))
+        )}
+      </div>
       <Footer />
     </div>
   );

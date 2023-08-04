@@ -15,6 +15,7 @@ function NavigationBar() {
   const navigate = useNavigate();
   useEffect(() => {
     // Check user authentication status here (you might need to modify this logic)
+
     const userProfile = localStorage.getItem("userProfile");
     setIsLoggedIn(userProfile);
   }, []);

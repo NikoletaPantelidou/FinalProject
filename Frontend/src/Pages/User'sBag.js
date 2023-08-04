@@ -18,13 +18,15 @@ export default function Bag() {
   return (
     <div className="user-bag-container">
       <NavigationBar />
-      {
-        <div className="bag-cards">
-          {products.map((product) => (
+      <div className="bag-cards">
+        {products.length === 0 ? (
+          <p className="bag-msg">Your bag is empty.</p>
+        ) : (
+          products.map((product) => (
             <BagCard key={product._id} product={product} />
-          ))}
-        </div>
-      }
+          ))
+        )}
+      </div>
       <Footer />
     </div>
   );

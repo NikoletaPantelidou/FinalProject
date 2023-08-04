@@ -3,13 +3,15 @@ import axios from "axios";
 import { Form, Button, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function LogIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [profile, setProfile] = useState([]);
   const navigate = useNavigate();
-  //debugger;
+
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
@@ -27,19 +29,23 @@ function LogIn() {
           username,
           password,
         })
+
         .then(async (token) => {
-          const user = await axios.get(
-            "http://localhost:4000/user/userInfo/" + token.token
-          );
-          localStorage.setItem("userProfile", JSON.stringify(user.data));
+          await axios
+            .get("http://localhost:4000/user/userInfo/" + token.data.token)
+            .then((user) => {
+              localStorage.setItem("userProfile", JSON.stringify(user.data));
+              setProfile(user.data);
+              navigate("/homepage");
+            });
+        })
+        .catch(() => {
+          setErrorMessage("Incorrect password or username");
         });
       // Handle successful login response
-
-      navigate("/homepage");
     } catch (error) {
       // Handle login error
       console.log(error);
-      setErrorMessage("Incorrect password or username");
     }
   };
 
@@ -66,11 +72,10 @@ function LogIn() {
         />
       </Form.Group>
 
-      <Link to={"/homepage"}>
-        <Button variant="primary" type="submit" onClick={() => handleLogin()}>
-          Log in
-        </Button>
-      </Link>
+      <Button variant="primary" onClick={() => handleLogin()}>
+        Log in
+      </Button>
+
       <div>
         <p>
           Don't you have an account? Sign in{" "}

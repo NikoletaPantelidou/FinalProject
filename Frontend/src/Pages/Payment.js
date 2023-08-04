@@ -18,7 +18,7 @@ function BuyButtonComponent() {
         },
       ],
       mode: "payment",
-      successUrl: "https://buy.stripe.com/test_8wMaGm0l5a9Uc7u000",
+      successUrl: "http://localhost:3000/homepage",
       cancelUrl: "https://dashboard.stripe.com/test/payments?status[0]=failed",
     });
     // If `redirectToCheckout` fails due to a browser or network
