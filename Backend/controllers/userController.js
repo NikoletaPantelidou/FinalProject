@@ -34,7 +34,7 @@ var userLogin = async (req, res) => {
         //create the token to send it back to the front
         //payload + secret ==> token
         var token = jwt.sign({ id: user._id }, "123", process.env.TOKEN_KEY, {
-          expiresIn: "2h",
+          expiresIn: "5h",
         });
         user.token = token;
         res.send({ token });
@@ -47,13 +47,38 @@ var userLogin = async (req, res) => {
   }
 };
 
-var getUserInfoByToken = async (req, res) => {
+/*var getUserInfoByToken = async (req, res) => {
   const token = req.params.token;
   const decodedToken = jwt.verify(token, "123");
   try {
     const user = await userModel.findById(decodedToken.id);
     res.status(200).json(user);
   } catch (error) {
+    res.status(500).json(error);
+  }
+};*/
+var getUserInfoByToken = async (req, res) => {
+  const token = req.params.token;
+  console.log("Token:", token);
+
+  try {
+    // Find user by ID in the database using the decoded token's ID
+    const decodedToken = jwt.verify(token, "123");
+    const user = await userModel.findById(decodedToken.id);
+
+    if (user) {
+      // Send user information back as response
+      res.status(200).json(user);
+    } else {
+      // User not found for the given token
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    if (error instanceof jwt.JsonWebTokenError) {
+      return res
+        .status(401)
+        .json({ error: "Invalid token", details: error.message });
+    }
     res.status(500).json(error);
   }
 };

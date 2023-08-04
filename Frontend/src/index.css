@@ -24,14 +24,17 @@ code {
   font-family: papyrus;
 }
 
-.btn.btn-primary {
+.btn.btn-primary,
+.pay-btn {
   background-color: #dbc8c8;
   color: black;
   border-width: 2px;
   border-radius: 13px;
   margin: 5px;
   border: none;
+  padding: 7px;
 }
+
 form {
   margin: -3px;
   border-style: solid;

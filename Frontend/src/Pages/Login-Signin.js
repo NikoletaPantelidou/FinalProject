@@ -11,28 +11,11 @@ function LogIn() {
   const navigate = useNavigate();
   //debugger;
   const handleUsernameChange = (event) => {
-    setUsername(event);
+    setUsername(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
-    setPassword(event);
-  };
-
-  const handleSignin = async () => {
-    /* event.preventDefault();*/
-
-    try {
-      const response = await axios.post("http://localhost:4000/user/signin", {
-        username,
-        password,
-      });
-
-      // Handle successful signup response
-      console.log("Signin:", response.data);
-    } catch (error) {
-      // Handle signup error
-      setErrorMessage("Please write a valid username");
-    }
+    setPassword(event.target.value);
   };
 
   const handleLogin = async (event) => {
@@ -45,7 +28,6 @@ function LogIn() {
           password,
         })
         .then(async (token) => {
-          debugger;
           const user = await axios.get(
             "http://localhost:4000/user/userInfo/" + token.token
           );
@@ -71,7 +53,7 @@ function LogIn() {
           type="username"
           placeholder="Enter username"
           value={username}
-          onChange={() => handleUsernameChange()}
+          onChange={(e) => handleUsernameChange(e)}
         />
       </Form.Group>
       <Form.Group controlId="formPassword">
@@ -80,7 +62,7 @@ function LogIn() {
           type="password"
           placeholder="Password"
           value={password}
-          onChange={() => handlePasswordChange()}
+          onChange={(e) => handlePasswordChange(e)}
         />
       </Form.Group>
 

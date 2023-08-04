@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { useState } from "react";
+import BuyButtonComponent from "../Pages/Payment";
 
 function BagCard(product) {
   //the product is deleted from the bag
@@ -37,8 +38,7 @@ function BagCard(product) {
         <Card.Title>{product.product.title}</Card.Title>
         <Card.Text>{product.product.text}</Card.Text>
         <Card.Text>{product.product.price}</Card.Text>
-        <Button variant="primary">Buy</Button>
-
+        <BuyButtonComponent />
         <Button
           variant="danger"
           onClick={() => handleDeleteConfirmation(product.product._id)}
