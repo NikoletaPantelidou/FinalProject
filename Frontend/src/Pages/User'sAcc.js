@@ -3,16 +3,39 @@ import { useState } from "react";
 import NavigationBar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import { useEffect } from "react";
+import axios from "axios";
 
 export default function MyAccount() {
   const [file, setFile] = useState();
   const [userData, setUserData] = useState({});
+  const [updateSuccess, setUpdateSuccess] = useState(false);
+
+  const updateUserInfo = async (event) => {
+    try {
+      const response = await axios.put(
+        "http://localhost:4000/user/updateUserInfo/" + userData._id,
+        {
+          fullName: userData.fullName,
+          address: userData.address,
+          email: userData.email,
+          city: userData.city,
+          mobile: userData.mobile,
+        }
+      );
+
+      console.log(response.data);
+      setUpdateSuccess(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     // Retrieve data from localStorage and parse it to a JavaScript object
     const storedData = localStorage.getItem("userProfile");
     if (storedData) {
       setUserData(JSON.parse(storedData));
+      console.log({ ...userData.userType });
       setFile(JSON.parse(storedData).profilePicture); // Set the file state with the profilePicture URL
     }
   }, []);
@@ -26,65 +49,76 @@ export default function MyAccount() {
       <NavigationBar />
 
       <div className="user-container">
-        <input className="img-file" type="file" onChange={handleChange} />
-        <img className="user-image" src={file} />
+        {userData.userType === true ? (
+          <>
+            <input className="img-file" type="file" onChange={handleChange} />
+            <img className="user-image" alt="" src={file} />
+          </>
+        ) : (
+          <>
+            <img src={userData.picture} alt="" className="user-pic" />
+            <div className="user-info">
+              <input
+                className="user-name"
+                placeholder="Name"
+                value={userData.name || ""}
+                onChange={(e) =>
+                  setUserData({ ...userData, name: e.target.value })
+                }
+              />
+            </div>
+          </>
+        )}
 
-        <img
-          src={userData.picture}
-          alt=""
-          className="user-pic"
-          placeholder="Image"
-          value={userData.picture || ""}
-          onChange={(e) =>
-            setUserData({ ...userData, picture: e.target.value })
-          }
-        />
         <div className="user-info">
-          <input
-            className="user-name"
-            placeholder="Name"
-            value={userData.name || ""}
-            onChange={(e) => setUserData({ ...userData, name: e.target.value })}
-          />
-          <input
-            className="user-surname"
-            placeholder="Surname"
-            value={userData.surname || ""}
-            onChange={(e) =>
-              setUserData({ ...userData, surname: e.target.value })
-            }
-          />
-          <input
-            className="user-city"
-            placeholder="City"
-            value={userData.city || ""}
-            onChange={(e) => setUserData({ ...userData, city: e.target.value })}
-          />
-          <input
-            className="user-address"
-            placeholder="Address"
-            value={userData.address || ""}
-            onChange={(e) =>
-              setUserData({ ...userData, address: e.target.value })
-            }
-          />
-          <input
-            className="user-telephone"
-            placeholder="mobile"
-            value={userData.mobile || ""}
-            onChange={(e) =>
-              setUserData({ ...userData, mobile: e.target.value })
-            }
-          />
-          <input
-            className="user-email"
-            placeholder="email"
-            value={userData.email || ""}
-            onChange={(e) =>
-              setUserData({ ...userData, email: e.target.value })
-            }
-          />
-          <button className="update-btn">Update information</button>
+          {userData.userType === true && (
+            <>
+              <input
+                className="user-name"
+                placeholder="Name"
+                value={userData.fullName || ""}
+                onChange={(e) =>
+                  setUserData({ ...userData, fullName: e.target.value })
+                }
+              />
+              <input
+                className="user-city"
+                placeholder="City"
+                value={userData.city || ""}
+                onChange={(e) =>
+                  setUserData({ ...userData, city: e.target.value })
+                }
+              />
+              <input
+                className="user-address"
+                placeholder="Address"
+                value={userData.address || ""}
+                onChange={(e) =>
+                  setUserData({ ...userData, address: e.target.value })
+                }
+              />
+              <input
+                className="user-mobile"
+                placeholder="mobile"
+                value={userData.mobile || ""}
+                onChange={(e) =>
+                  setUserData({ ...userData, mobile: e.target.value })
+                }
+              />
+              <input
+                className="user-email"
+                placeholder="email"
+                value={userData.email || ""}
+                onChange={(e) =>
+                  setUserData({ ...userData, email: e.target.value })
+                }
+              />
+              <button className="update-btn" onClick={() => updateUserInfo()}>
+                Update information
+              </button>
+              {updateSuccess && <p>Update successful!</p>}
+            </>
+          )}
         </div>
       </div>
       <Footer />

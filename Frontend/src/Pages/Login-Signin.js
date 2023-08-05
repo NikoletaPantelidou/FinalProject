@@ -53,7 +53,7 @@ function LogIn() {
     <Form>
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       <h2>Welcome!</h2>
-      <Form.Group controlId="formUsername">
+      <Form.Group controlId="formName">
         <Form.Label>Username</Form.Label>
         <Form.Control
           type="username"

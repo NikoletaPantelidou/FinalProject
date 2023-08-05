@@ -30,12 +30,17 @@ export default function SignIn() {
   const [city, setCity] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [userType, setUserType] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
+  };
+  const handleFullNameChange = (event) => {
+    setFullName(event.target.value);
   };
   const handleAddressChange = (event) => {
     setAddress(event.target.value);
@@ -66,9 +71,11 @@ export default function SignIn() {
           mobile,
           city,
           email,
+          fullName,
+          userType,
         })
         .then(() => {
-          window.alert("You signed up successfully!");
+          window.alert("You signed in successfully!");
           navigate("/user/auth");
         })
         .catch(() => window.alert("Failed to create a new account"));
@@ -97,6 +104,15 @@ export default function SignIn() {
             placeholder="Enter username"
             value={username}
             onChange={handleUsernameChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="formFullName">
+          <Form.Label>Full-name</Form.Label>
+          <Form.Control
+            type="fullName"
+            placeholder="Enter full-name"
+            value={fullName}
+            onChange={handleFullNameChange}
           />
         </Form.Group>
         <Form.Group controlId="formAddress">

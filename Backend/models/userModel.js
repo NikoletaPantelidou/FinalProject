@@ -6,6 +6,8 @@ const user = new mongoose.Schema({
   city: { type: String, required: true },
   address: { type: String, required: true },
   email: { type: String, required: true },
+  fullName: { type: String, required: true },
+  userType: { type: Boolean, required: true },
 });
 
 const userModel = mongoose.model("users", user);

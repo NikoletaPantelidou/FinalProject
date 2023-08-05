@@ -9,6 +9,7 @@ import Bag from "./Pages/User'sBag";
 import Favourites from "./Pages/User'sFav";
 import MyAccount from "./Pages/User'sAcc";
 import SignIn from "./Pages/SignIn";
+import Success from "./Pages/Successful";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/bag" element={<Bag />} />
       <Route path="/favourites" element={<Favourites />} />
       <Route path="/account" element={<MyAccount />} />
+      <Route path="/success" element={<Success />} />
     </Routes>
   );
 }

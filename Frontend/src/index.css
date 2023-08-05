@@ -47,7 +47,6 @@ form {
 }
 
 .sign-in-form {
-  margin: -3px;
   border-style: solid;
   border-color: white;
   text-align-last: center;
@@ -56,7 +55,7 @@ form {
   font-family: papyrus;
   border-radius: 20px;
   margin-left: 531px;
-  margin-top: 122px;
+  margin-top: 50px;
 }
 
 .google-btn {
@@ -234,11 +233,27 @@ svg:hover {
   align-self: center;
 }
 
-button {
-  background-color: white;
-  border-radius: 11px;
-  font-size: 21px;
-  color: black;
+.user-city,
+.user-email,
+.user-address,
+.user-mobile,
+.user-name {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  border-radius: 8px;
+  margin: 8px;
+}
+
+.update-btn {
+  border-radius: 7px;
+  font-size: inherit;
+  background-color: #dbc8c8;
+  border: none;
+  width: 175px;
+  margin: 8px;
+  padding: 3px;
 }
 
 /*style of the background images in the auth page*/
@@ -264,6 +279,20 @@ button {
   z-index: -1;
 }
 
+/*Style for success page*/
+.success-message {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  color: green;
+  font-size: 35px;
+  font-family: papyrus;
+  margin: 100px;
+}
+
+.success-icon {
+  margin-right: 10px;
+}
 @keyframes slide {
   20% {
     transform: translateX(0);

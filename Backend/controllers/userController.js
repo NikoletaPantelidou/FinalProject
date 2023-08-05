@@ -17,6 +17,8 @@ var userSignin = async (req, res) => {
         mobile: req.body.mobile,
         email: req.body.email,
         city: req.body.city,
+        fullName: req.body.fullName,
+        userType: req.body.userType,
         password: hash,
       };
 
@@ -47,16 +49,6 @@ var userLogin = async (req, res) => {
   }
 };
 
-/*var getUserInfoByToken = async (req, res) => {
-  const token = req.params.token;
-  const decodedToken = jwt.verify(token, "123");
-  try {
-    const user = await userModel.findById(decodedToken.id);
-    res.status(200).json(user);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};*/
 var getUserInfoByToken = async (req, res) => {
   const token = req.params.token;
   console.log("Token:", token);
@@ -83,8 +75,33 @@ var getUserInfoByToken = async (req, res) => {
   }
 };
 
+const updateUserInfo = async (req, res, next) => {
+  const id = req.params.id;
+  const { fullName, address, city, email, mobile } = req.body;
+  let user;
+  try {
+    user = await userModel.findByIdAndUpdate(_id, {
+      fullName,
+      address,
+      city,
+      email,
+      mobile,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  if (!user) {
+    return res
+      .status(404)
+      .json({ message: "Unable To update user information" });
+  }
+  user = await user.save();
+  return res.status(200).json({ user });
+};
+
 module.exports = {
   userLogin,
   userSignin,
   getUserInfoByToken,
+  updateUserInfo,
 };
