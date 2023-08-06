@@ -12,19 +12,23 @@ export default function MyAccount() {
 
   const updateUserInfo = async (event) => {
     try {
-      const response = await axios.put(
-        "http://localhost:4000/user/updateUserInfo/" + userData._id,
-        {
+      await axios
+        .put("http://localhost:4000/user/updateUserInfo/" + userData._id, {
           fullName: userData.fullName,
           address: userData.address,
           email: userData.email,
           city: userData.city,
           mobile: userData.mobile,
-        }
-      );
-
-      console.log(response.data);
-      setUpdateSuccess(true);
+        })
+        .then((response) => {
+          console.log(response.data);
+          setUpdateSuccess(true);
+          localStorage.removeItem("userProfile");
+          localStorage.setItem(
+            "userProfile",
+            JSON.stringify(response.data.user)
+          );
+        });
     } catch (error) {
       console.log(error);
     }

@@ -79,8 +79,9 @@ const updateUserInfo = async (req, res, next) => {
   const id = req.params.id;
   const { fullName, address, city, email, mobile } = req.body;
   let user;
+
   try {
-    user = await userModel.findByIdAndUpdate(_id, {
+    user = await userModel.findByIdAndUpdate(id, {
       fullName,
       address,
       city,
@@ -96,6 +97,7 @@ const updateUserInfo = async (req, res, next) => {
       .json({ message: "Unable To update user information" });
   }
   user = await user.save();
+  user = await userModel.findById(id);
   return res.status(200).json({ user });
 };
 
