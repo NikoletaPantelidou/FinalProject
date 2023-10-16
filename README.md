@@ -1,4 +1,6 @@
 # StyleWithMe
+![- Silvia Mellow -](https://github.com/NikoletaPantelidou/StyleWithMe/assets/123751167/2fe69e6e-c8f6-435c-8c23-4c2715394f2d)
+
 
 # What is this website about?
 
@@ -16,4 +18,3 @@ CRUD operations, payment using stripe, image uploading, Google sign in, Simple s
 
 The most highlighted challenges during this project was the feature of sign in with Google account and the gathering of user's information in the "user's account" page.
 
-![- Silvia Mellow -](https://github.com/NikoletaPantelidou/StyleWithMe/assets/123751167/2fe69e6e-c8f6-435c-8c23-4c2715394f2d)
